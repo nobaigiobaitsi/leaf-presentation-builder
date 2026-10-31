@@ -1,0 +1,26 @@
+{
+  "name": "leaf-presentation-builder",
+  "version": "1.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "test": "node --test tests/*.test.js",
+    "desktop:setup": "npm --prefix desktop install",
+    "desktop:stage": "npm run build && node scripts/stage-desktop.mjs",
+    "desktop:start": "npm run desktop:stage && npm --prefix desktop start",
+    "desktop:make": "npm run desktop:stage && npm --prefix desktop run make"
+  },
+  "dependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "vite": "^7.1.0"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}
