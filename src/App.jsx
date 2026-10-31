@@ -1,5 +1,5 @@
 import React,{useEffect,useRef,useState} from 'react';
-import {buildPages,pageLabel,validateProject,newProperty,moveItem,uid,MAX_PROPERTIES,money} from './lib/project.js';
+import {buildPages,pageLabel,createEmptyProject,validateProject,newProperty,moveItem,uid,MAX_PROPERTIES,money} from './lib/project.js';
 import {loadImage,saveFile,openFile,readDraft,writeDraft} from './lib/files.js';
 import {Slide,PrintDeck} from './components/Slides.jsx';
 function Field({label,value,onChange,maxLength=60,type='text',multiline=false,placeholder='',...rest}){return <label className="field"><span>{label}</span>{multiline?<textarea value={value} onChange={e=>onChange(e.target.value)} maxLength={maxLength} placeholder={placeholder} {...rest}/>:<input type={type} value={value} onChange={e=>onChange(type==='number'?(e.target.value===''?'':Number(e.target.value)):e.target.value)} maxLength={maxLength} placeholder={placeholder} {...rest}/>}</label>;}
