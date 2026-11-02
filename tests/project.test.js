@@ -6,7 +6,7 @@ import {
   buildPages,
   moveItem,
   newProperty,
-  createEmptyProject,
+  createEmptyProject
 } from '../src/lib/project.js';
 
 function testProject() {
@@ -20,10 +20,10 @@ function testProject() {
         {
           id: 'test-photo',
           src: 'data:image/jpeg;base64,YWJj',
-          caption: 'Δοκιμή',
-        },
-      ],
-    },
+          caption: 'Δοκιμή'
+        }
+      ]
+    }
   ];
 
   return project;
@@ -52,21 +52,17 @@ test('pagination does not lose properties beyond eight', () => {
 
   project.properties = Array.from({ length: 17 }, (_, i) => ({
     ...newProperty(),
-    id: String(i),
+    id: String(i)
   }));
 
   const pages = buildPages(project);
 
   assert.deepEqual(
-    pages.filter(page => page.type === 'overview')
-      .map(page => page.items.length),
+    pages.filter(page => page.type === 'overview').map(page => page.items.length),
     [8, 8, 1]
   );
 
-  assert.equal(
-    pages.filter(page => page.type === 'property').length,
-    17
-  );
+  assert.equal(pages.filter(page => page.type === 'property').length, 17);
 });
 
 test('excluded properties and disabled sections stay out of PDF', () => {
@@ -96,7 +92,7 @@ test('portable imports reject remote, svg, and unresolved relative images', () =
   const invalidSources = [
     'https://example.com/x.png',
     'data:image/svg+xml;base64,abcd',
-    'assets/logo.jpg',
+    'assets/logo.jpg'
   ];
 
   for (const src of invalidSources) {
@@ -113,20 +109,11 @@ test('portable project round-trips embedded images and text', () => {
   const project = testProject();
   project.presentation.logo = 'data:image/png;base64,YWJj';
 
-  const validated = validateProject(
-    JSON.parse(JSON.stringify(project)),
-    { portable: true }
-  );
+  const validated = validateProject(JSON.parse(JSON.stringify(project)), { portable: true });
 
-  assert.equal(
-    validated.properties[0].photos[0].src,
-    project.properties[0].photos[0].src
-  );
+  assert.equal(validated.properties[0].photos[0].src, project.properties[0].photos[0].src);
 
-  assert.equal(
-    validated.properties[0].description,
-    project.properties[0].description
-  );
+  assert.equal(validated.properties[0].description, project.properties[0].description);
 });
 
 test('unknown file versions and oversized property lists are rejected', () => {
@@ -139,7 +126,7 @@ test('unknown file versions and oversized property lists are rejected', () => {
   assert.throws(() => {
     validateProject({
       ...project,
-      properties: Array(41).fill(project.properties[0]),
+      properties: Array(41).fill(project.properties[0])
     });
   });
 });
