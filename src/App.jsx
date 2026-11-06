@@ -340,7 +340,6 @@ export default function App() {
               αντίγραφο ασφαλείας.
             </p>
             <button onClick={() => newProject(false)}>Νέο κενό έργο</button>
-            <button onClick={newProject}>Νέο κενό έργο</button>
           </div>
         </aside>
         <main>

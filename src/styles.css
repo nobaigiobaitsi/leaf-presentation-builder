@@ -695,7 +695,7 @@ input[type='checkbox'] {
   margin-bottom: 10px;
 }
 .print-deck {
-  position: absolute;
+  position: fixed;
   left: -100000px;
   top: 0;
   visibility: hidden;
