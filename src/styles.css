@@ -98,34 +98,36 @@ input[type='checkbox'] {
   align-items: center;
   gap: 12px;
   text-decoration: none;
-  color: white;
+  color: #f6f5ef;
   padding: 0 10px 35px;
   font-family: Georgia, serif;
   font-size: 28px;
-  letter-spacing: 2px;
+  line-height: 1;
+  letter-spacing: 3px;
 }
 .brand > div > span {
   display: block;
   font-family: Arial, sans-serif;
   font-size: 9px;
-  letter-spacing: 1px;
-  margin-top: 6px;
-  color: #b4c5b8;
+  line-height: 1;
+  letter-spacing: 3px;
+  margin-top: 7px;
+  color: #f6f5ef;
 }
 .brand-mark {
-  width: 42px;
-  height: 46px;
-  border: 1px solid #829c7f;
-  border-radius: 11px 2px 11px 2px;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  border-radius: 9px;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
+  background: #18483d;
+  color: #ded89b;
 }
-.brand-mark span {
-  font-size: 15px;
-  color: #cfb47c;
-  margin: 0 0 15px -5px;
+.brand-mark svg {
+  width: 26px;
+  height: 26px;
 }
 .sidebar-heading {
   font-size: 9px;

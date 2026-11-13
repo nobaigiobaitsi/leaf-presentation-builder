@@ -272,11 +272,14 @@ export default function App() {
               setPageIndex(0);
             }}
           >
-            <span className="brand-mark">
-              L<span>↗</span>
+            <span className="brand-mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20 3s-9-1-13 4c-3 4-1 8 2 9 3 1 7-1 9-5 1-3 2-8 2-8Z" />
+                <path d="M4 21c2-5 5-9 10-13" />
+              </svg>
             </span>
             <div>
-              LEAF<span>Presentation Builder</span>
+              LEAF<span>PROPERTIES</span>
             </div>
           </a>
           <div className="sidebar-heading">ΤΟ ΕΡΓΟ ΣΑΣ</div>
