@@ -149,8 +149,8 @@ export function Slide({ page, project, number }) {
             </>
           )}
           {page.type === 'photos' && (
-            <div className={`gallery count-${p.photos.length}`}>
-              {p.photos.map(ph => (
+            <div className={`gallery count-${page.photos.length}`}>
+              {page.photos.map(ph => (
                 <figure key={ph.id}>
                   <div className="photo-container">
                     <img src={ph.src} alt={ph.caption || p.title} />

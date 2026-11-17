@@ -215,8 +215,6 @@ export default function App() {
     const id = property.id;
     const existing = property.photos;
     const chosen = [...files];
-    if (replaceIndex === null && chosen.length > 3 - existing.length)
-      throw Error('Μπορείτε να επιλέξετε έως 3 φωτογραφίες συνολικά.');
     const results = [];
     for (const f of chosen) {
       results.push({ id: uid(), src: await loadImage(f), caption: '' });
@@ -420,7 +418,7 @@ export default function App() {
                         if (i >= 0) setPageIndex(i);
                       }}
                     >
-                      Φωτογραφίες <span>{property.photos.length}/3</span>
+                      Φωτογραφίες <span>{property.photos.length}</span>
                     </button>
                   </div>
                   {tab === 'details' ? (
@@ -537,8 +535,9 @@ export default function App() {
                   ) : (
                     <div className="photos-editor">
                       <p className="hint">
-                        Έως 3 εικόνες JPG, PNG ή WebP. Η εφαρμογή διατηρεί ολόκληρο το κάδρο χωρίς
-                        παραμόρφωση.
+                        Εικόνες JPG, PNG ή WebP, με έως 3 φωτογραφίες ανά σελίδα. Οι επιπλέον
+                        φωτογραφίες δημιουργούν αυτόματα νέες σελίδες με τις λεζάντες τους.
+                        Η εφαρμογή διατηρεί ολόκληρο το κάδρο χωρίς παραμόρφωση.
                       </p>
                       {property.photos.map((ph, i) => (
                         <div className="photo-edit" key={ph.id}>
@@ -606,8 +605,7 @@ export default function App() {
                           </div>
                         </div>
                       ))}
-                      {property.photos.length < 3 && (
-                        <label className={`upload-zone ${busy ? 'disabled' : ''}`}>
+                      <label className={`upload-zone ${busy ? 'disabled' : ''}`}>
                           <span>＋</span>
                           <b>Προσθήκη φωτογραφιών</b>
                           <small>Έως 15 MB ανά εικόνα</small>
@@ -623,7 +621,6 @@ export default function App() {
                             }}
                           />
                         </label>
-                      )}
                       <p className="hint">
                         Οι εικόνες ανεβαίνουν τοπικά. Δεν γίνεται αυτόματη αφαίρεση watermark.
                       </p>

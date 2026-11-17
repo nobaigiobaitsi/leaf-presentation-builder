@@ -1,4 +1,5 @@
 export const MAX_PROPERTIES = 40;
+export const PHOTOS_PER_PAGE = 3;
 export const MAX_FILE_BYTES = 60 * 1024 * 1024;
 export const uid = () =>
   globalThis.crypto.randomUUID?.() ||
@@ -73,8 +74,8 @@ export function validateProject(raw, { portable = false } = {}) {
     if (!Array.isArray(p.features) || p.features.length > 8)
       throw Error('Κάθε ακίνητο υποστηρίζει έως 8 χαρακτηριστικά.');
     o.features = p.features.map(f => string(f, 90)).filter(Boolean);
-    if (!Array.isArray(p.photos) || p.photos.length > 3)
-      throw Error('Κάθε ακίνητο υποστηρίζει έως 3 φωτογραφίες.');
+    if (!Array.isArray(p.photos))
+      throw Error('Μη έγκυρη λίστα φωτογραφιών.');
     o.photos = p.photos.map((ph, j) => ({
       id: `photo-${i}-${j}`,
       src: source(ph.src),
@@ -127,7 +128,15 @@ export function buildPages(project) {
       pages.push({ type: 'comparison', items: ps.slice(i, i + 8), offset: i });
   ps.forEach((p, i) => {
     pages.push({ type: 'property', property: p, index: i });
-    if (p.photos.length) pages.push({ type: 'photos', property: p, index: i });
+    for (let offset = 0; offset < p.photos.length; offset += PHOTOS_PER_PAGE)
+      pages.push({
+        type: 'photos',
+        property: p,
+        index: i,
+        photos: p.photos.slice(offset, offset + PHOTOS_PER_PAGE),
+        photoPage: Math.floor(offset / PHOTOS_PER_PAGE) + 1,
+        photoPageCount: Math.ceil(p.photos.length / PHOTOS_PER_PAGE)
+      });
   });
   if (project.presentation.closing) pages.push({ type: 'closing' });
   return pages;
@@ -136,7 +145,7 @@ export const pageLabel = p =>
   ({ cover: 'Εξώφυλλο', overview: 'Επισκόπηση', comparison: 'Σύγκριση', closing: 'Επικοινωνία' })[
     p.type
   ] ||
-  `${String(p.index + 1).padStart(2, '0')} · ${p.type === 'photos' ? 'Φωτογραφίες' : 'Χαρακτηριστικά'}`;
+  `${String(p.index + 1).padStart(2, '0')} · ${p.type === 'photos' ? 'Φωτογραφίες' + (p.photoPageCount > 1 ? ' ' + p.photoPage + '/' + p.photoPageCount : '') : 'Χαρακτηριστικά'}`;
 export const createEmptyProject = () => ({
   format: 'leaf-presentation',
   version: 1,
